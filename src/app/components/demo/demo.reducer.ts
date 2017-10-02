@@ -2,9 +2,6 @@ import * as constants from './demo.constants';
 
 export interface DemoState {
   data?: any;
-  error?: any;
-  loading: boolean;
-  loaded: boolean;
 }
 
 export interface Action {
@@ -14,8 +11,7 @@ export interface Action {
 }
 
 const initialState = {
-  loading: false,
-  loaded: false,
+  data: {}
 };
 
 export function reducer(state = initialState, action: Action) {
@@ -23,25 +19,41 @@ export function reducer(state = initialState, action: Action) {
     case constants.LOAD_DEMO_PENDING: {
       return {
         ...state,
-        loading: true,
-        loaded: false,
-      };
+        data: {
+          ...state.data,
+          [action.payload]: {
+            loading: true,
+            loaded: false,
+          }
+        }
+
+      }
     }
 
     case constants.LOAD_DEMO_SUCCESS: {
       return {
         ...state,
-        data: action.payload,
-        loading: false,
-        loaded: true,
+        data: {
+          ...state.data,
+          [action.payload.id]: {
+            data: action.payload,
+            loading: false,
+            loaded: true,
+          }
+        }
       };
     }
     case constants.LOAD_DEMO_FAILURE:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: action.error,
+        data: {
+          ...state.data,
+          [action.payload]: {
+            loading: false,
+            loaded: false,
+            error: action.error,
+          }
+        },
       };
     case constants.RESET_DEMO: {
       return initialState;

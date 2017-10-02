@@ -19,7 +19,8 @@ export class DemoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.demoService.loadDemoData();
+
+    [1,2,4,5].forEach(() => this.demoService.loadDemoData());
 
     this.demoData = this.store.select(getDemoData);
   }

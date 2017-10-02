@@ -13,21 +13,27 @@ export class DemoService {
   ) {}
 
   loadDemoData(): void {
-    this.store.dispatch(loadDemoPending());
+    const id = Math.random();
+
+    this.store.dispatch(loadDemoPending({ id }));
 
     try {
       const success = Math.random()  < 0.5;
+
       if (!success) {
         throw 'I am Error';
       }
       setTimeout(() => {
-        const success = Math.random()  < 0.5;
-        this.store.dispatch(loadDemoSuccess({ data: 1 }));
+
+        this.store.dispatch(loadDemoSuccess({ data: {
+          id,
+          text: id
+        } }));
       }, Math.random()* 100)
 
 
     } catch (error) {
-      this.store.dispatch(loadDemoFailure(error));
+      this.store.dispatch(loadDemoFailure({ error, id }));
     }
   }
 

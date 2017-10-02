@@ -5,13 +5,15 @@ export const loadDemoSuccess = ({ data }) => ({
   payload: data,
 });
 
-export const loadDemoFailure = error => ({
+export const loadDemoFailure = ({error, id }) => ({
   type: constants.LOAD_DEMO_FAILURE,
   error,
+  payload: id
 });
 
-export const loadDemoPending = () => ({
+export const loadDemoPending = ({ id }) => ({
   type: constants.LOAD_DEMO_PENDING,
+  payload: id
 });
 
 export const resetDemo = () => ({
