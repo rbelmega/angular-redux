@@ -1,5 +1,7 @@
 {
-  "port": 8000,
+  "port": 80,
   "files": ["./dist/*.{html,htm,css,js}"],
-  "server": { "baseDir": "./dist" }
+  "server": { "baseDir": "./dist" },
+  "ui": false,
+  "open": false
 }
