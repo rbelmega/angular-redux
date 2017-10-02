@@ -12,9 +12,7 @@ export class DemoService {
     private store: Store<any>,
   ) {}
 
-  loadDemoData(): void {
-    const id = Math.random();
-
+  loadDemoData({ id }): void {
     this.store.dispatch(loadDemoPending({ id }));
 
     try {

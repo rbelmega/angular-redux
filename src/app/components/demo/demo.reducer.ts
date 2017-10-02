@@ -22,6 +22,7 @@ export function reducer(state = initialState, action: Action) {
         data: {
           ...state.data,
           [action.payload]: {
+            id: action.payload,
             loading: true,
             loaded: false,
           }
@@ -51,6 +52,7 @@ export function reducer(state = initialState, action: Action) {
           [action.payload]: {
             loading: false,
             loaded: false,
+            id: action.payload,
             error: action.error,
           }
         },

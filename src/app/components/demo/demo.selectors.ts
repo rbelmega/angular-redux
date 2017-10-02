@@ -5,6 +5,10 @@ export const getDemoDataReducer = (state) =>
 
 export const getDemoData = createSelector(
   getDemoDataReducer,
-  (demoReducer) =>
-    demoReducer.data
+  (demoReducer) => {
+    if (demoReducer.data) {
+      return Object.keys(demoReducer.data).map(key => demoReducer.data[key])
+    }
+  }
+
 );
