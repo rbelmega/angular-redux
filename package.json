@@ -5,11 +5,14 @@
   "scripts": {
     "ng": "ng",
     "prestart": "npm run build",
-    "start": "lite-server -c ./bs-config.json",
+    "start": "node server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node" : "8.4.0"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +28,9 @@
     "@ngrx/router-store": "^4.0.4",
     "@ngrx/store": "^4.0.3",
     "@ngrx/store-devtools": "^4.0.0",
+    "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
+    "express": "^4.16.1",
     "ngrx-store-freeze": "^0.2.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
@@ -46,7 +51,6 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "lite-server": "^2.3.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
