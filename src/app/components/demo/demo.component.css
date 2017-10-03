@@ -1,0 +1,26 @@
+.example-component {
+  float: left;
+  width: 300px;
+  background: white;
+  height: 210px;
+  border: 1px solid #cccccc;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px #cccccc;
+}
+
+.example-component.loading {
+  background: rgba(255, 255, 0, 0.56);
+}
+
+.example-component.loaded {
+  background: white;
+}
+
+.example-component.error {
+  background: rgba(255, 0, 0, 0.51);
+}
+
+button {
+  font-size: 18px;
+}

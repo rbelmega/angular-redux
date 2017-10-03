@@ -27,7 +27,7 @@ export class DemoService {
           id,
           text: id
         } }));
-      }, Math.random()* 100)
+      }, Math.random() * 4000)
 
 
     } catch (error) {

@@ -6,12 +6,22 @@ import { getDemoData } from './demo.selectors';
 
 @Component({
   selector: 'app-demo',
+  styleUrls: ['./demo.component.css'],
   template: `
-    <div *ngFor='let item of (demoData | async)'>
-      <h3>{{ item | json }}</h3>
+    <div *ngFor='let item of (demoData | async)' class="example-component" 
+    [ngClass]="{
+      'loading':item.loading,
+      'loaded':item.loaded,
+      'error':item.error
+    }"
+    >
+      <h3>ID: {{ item.id }}</h3>
+      <h2>Status:</h2>
+      <p>loading: {{ item.loading }}</p>
+      <p>loading: {{ item.loaded }}</p>
+      
       <button *ngIf="item.error" (click)="reload(item)">reload</button>
     </div>
-    
   `,
 })
 export class DemoComponent implements OnInit {
@@ -23,7 +33,7 @@ export class DemoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    [1,2,4,5].forEach((id) => this.demoService.loadDemoData({ id }));
+    [1,2,4,5,6,7,8,9].forEach((id) => this.demoService.loadDemoData({ id }));
 
     this.demoData = this.store.select(getDemoData);
   }

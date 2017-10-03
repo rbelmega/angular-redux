@@ -211,6 +211,24 @@ var resetDemo = function () { return ({
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/demo/demo.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".example-component {\n  float: left;\n  width: 300px;\n  background: white;\n  height: 210px;\n  border: 1px solid #cccccc;\n  margin: 20px;\n  padding: 10px;\n  box-shadow: 2px 2px 2px #cccccc;\n}\n\n.example-component.loading {\n  background: rgba(255, 255, 0, 0.56);\n}\n\n.example-component.loaded {\n  background: white;\n}\n\n.example-component.error {\n  background: rgba(255, 0, 0, 0.51);\n}\n\nbutton {\n  font-size: 18px;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/demo/demo.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -240,7 +258,7 @@ var DemoComponent = (function () {
     }
     DemoComponent.prototype.ngOnInit = function () {
         var _this = this;
-        [1, 2, 4, 5].forEach(function (id) { return _this.demoService.loadDemoData({ id: id }); });
+        [1, 2, 4, 5, 6, 7, 8, 9].forEach(function (id) { return _this.demoService.loadDemoData({ id: id }); });
         this.demoData = this.store.select(__WEBPACK_IMPORTED_MODULE_3__demo_selectors__["a" /* getDemoData */]);
     };
     DemoComponent.prototype.reload = function (item) {
@@ -251,7 +269,8 @@ var DemoComponent = (function () {
 DemoComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-demo',
-        template: "\n    <div *ngFor='let item of (demoData | async)'>\n      <h3>{{ item | json }}</h3>\n      <button *ngIf=\"item.error\" (click)=\"reload(item)\">reload</button>\n    </div>\n    \n  ",
+        styles: [__webpack_require__("../../../../../src/app/components/demo/demo.component.css")],
+        template: "\n    <div *ngFor='let item of (demoData | async)' class=\"example-component\" \n    [ngClass]=\"{\n      'loading':item.loading,\n      'loaded':item.loaded,\n      'error':item.error\n    }\"\n    >\n      <h3>ID: {{ item.id }}</h3>\n      <h2>Status:</h2>\n      <p>loading: {{ item.loading }}</p>\n      <p>loading: {{ item.loaded }}</p>\n      \n      <button *ngIf=\"item.error\" (click)=\"reload(item)\">reload</button>\n    </div>\n  ",
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["h" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["h" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__demo_service__["a" /* DemoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__demo_service__["a" /* DemoService */]) === "function" && _b || Object])
 ], DemoComponent);
@@ -307,6 +326,7 @@ function reducer(state, action) {
         }
         case __WEBPACK_IMPORTED_MODULE_0__demo_constants__["c" /* LOAD_DEMO_SUCCESS */]: {
             return __assign({}, state, { data: __assign({}, state.data, (_b = {}, _b[action.payload.id] = {
+                    id: action.payload.id,
                     data: action.payload,
                     loading: false,
                     loaded: true,
@@ -389,7 +409,7 @@ var DemoService = (function () {
                         id: id,
                         text: id
                     } }));
-            }, Math.random() * 100);
+            }, Math.random() * 4000);
         }
         catch (error) {
             this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__demo_actions__["a" /* loadDemoFailure */])({ error: error, id: id }));

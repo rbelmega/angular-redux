@@ -37,6 +37,7 @@ export function reducer(state = initialState, action: Action) {
         data: {
           ...state.data,
           [action.payload.id]: {
+            id: action.payload.id,
             data: action.payload,
             loading: false,
             loaded: true,
