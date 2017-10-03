@@ -5,10 +5,9 @@ const http = require('http');
 const bodyParser = require('body-parser');
 
 const app = express();
-import StartKeepAlive from "./heroku-alive";
+const alive = require("./heroku-alive");
 
 
-const alive = new StartKeepAlive();
 alive.run();
 
 // Parsers for POST data

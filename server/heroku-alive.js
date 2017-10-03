@@ -1,7 +1,6 @@
-import http from 'http'; //importing http
+const http = require('http'); //importing http
 
-class StartKeepAlive {
-  run() {
+function run() {
     setInterval(() => {
       var options = {
         host: 'rbelmeha.herokuapp.com',
@@ -22,6 +21,7 @@ class StartKeepAlive {
     });
   }, 20 * 60 * 1000); // load every 20 minutes
   }
-}
 
-export default StartKeepAlive;
+module.exports = {
+  run: run
+};
