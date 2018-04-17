@@ -219,7 +219,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".example-component {\n  float: left;\n  width: 300px;\n  background: white;\n  height: 210px;\n  border: 1px solid #cccccc;\n  margin: 20px;\n  padding: 10px;\n  box-shadow: 2px 2px 2px #cccccc;\n}\n\n.example-component.loading {\n  background: rgba(255, 255, 0, 0.56);\n}\n\n.example-component.loaded {\n  background: white;\n}\n\n.example-component.error {\n  background: rgba(255, 0, 0, 0.51);\n}\n\nbutton {\n  font-size: 18px;\n}\n", ""]);
+exports.push([module.i, ".example-component {\n  float: left;\n  width: 300px;\n  background: white;\n  height: 210px;\n  border: 1px solid #cccccc;\n  margin: 20px;\n  padding: 10px;\n  box-shadow: 2px 2px 2px #cccccc;\n  position: relative;\n}\n\nh3 {\n  position: absolute;\n  top: 12px;\n  right: 20px;\n  font-size: 94px;\n  margin: 0;\n  color: rgba(0,0,0, .33);\n}\n\n.example-component.loading {\n  background: rgba(255, 255, 0, 0.56);\n}\n\n.example-component.loaded {\n  background: white;\n}\n\n.example-component.error {\n  background: rgba(255, 0, 0, 0.51);\n}\n\nbutton {\n  font-size: 18px;\n}\n", ""]);
 
 // exports
 
@@ -270,7 +270,7 @@ DemoComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-demo',
         styles: [__webpack_require__("../../../../../src/app/components/demo/demo.component.css")],
-        template: "\n    <div *ngFor='let item of (demoData | async)' class=\"example-component\" \n    [ngClass]=\"{\n      'loading':item.loading,\n      'loaded':item.loaded,\n      'error':item.error\n    }\"\n    >\n      <h3>ID: {{ item.id }}</h3>\n      <h2>Status:</h2>\n      <p>loading: {{ item.loading }}</p>\n      <p>loading: {{ item.loaded }}</p>\n      \n      <button *ngIf=\"item.error\" (click)=\"reload(item)\">reload</button>\n    </div>\n  ",
+        template: "\n    <div *ngFor='let item of (demoData | async)' class=\"example-component\" \n    [ngClass]=\"{\n      'loading':item.loading,\n      'loaded':item.loaded,\n      'error':item.error\n    }\"\n    >\n      <h3>{{ item.id }}</h3>\n      <div class=\"status\">\n        <h2>Status:</h2>\n        <p>loading: {{ item.loading }}</p>\n        <p>loading: {{ item.loaded }}</p>\n      </div>\n      <p *ngIf=\"item.loaded\">{{ item.data?.text }}</p>\n      \n      <button *ngIf=\"item.error\" (click)=\"reload(item)\">reload</button>\n    </div>\n  ",
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["h" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["h" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__demo_service__["a" /* DemoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__demo_service__["a" /* DemoService */]) === "function" && _b || Object])
 ], DemoComponent);
@@ -399,21 +399,53 @@ var DemoService = (function () {
         var _this = this;
         var id = _a.id;
         this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__demo_actions__["b" /* loadDemoPending */])({ id: id }));
-        try {
-            var success = Math.random() < 0.5;
-            if (!success) {
-                throw 'I am Error';
-            }
-            setTimeout(function () {
-                _this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__demo_actions__["c" /* loadDemoSuccess */])({ data: {
+        setTimeout(function () {
+            try {
+                var success = Math.random() < 0.43;
+                if (!success) {
+                    throw 'I am Error';
+                }
+                _this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__demo_actions__["c" /* loadDemoSuccess */])({
+                    data: {
                         id: id,
-                        text: id
-                    } }));
-            }, Math.random() * 4000);
-        }
-        catch (error) {
-            this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__demo_actions__["a" /* loadDemoFailure */])({ error: error, id: id }));
-        }
+                        text: _this.gerQuote()
+                    }
+                }));
+            }
+            catch (error) {
+                _this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__demo_actions__["a" /* loadDemoFailure */])({ error: error, id: id }));
+            }
+        }, Math.random() * 4000);
+    };
+    DemoService.prototype.gerQuote = function () {
+        var quotes = [
+            "“Help me, Obi-Wan Kenobi. You’re my only hope.” — Leia Organa",
+            "“I find your lack of faith disturbing.” — Darth Vader",
+            "“It’s the ship that made the Kessel run in less than twelve parsecs. I’ve outrun Imperial starships. Not the local bulk cruisers, mind you. I’m talking about the big Corellian ships, now. She’s fast enough for you, old man.” — Han Solo",
+            "“The Force will be with you. Always.” — Obi-Wan Kenobi",
+            "“Why, you stuck-up, half-witted, scruffy-looking nerf herder!” — Leia Organa",
+            "“Never tell me the odds!” — Han Solo",
+            "“Do. Or do not. There is no try.” — Yoda",
+            "“No. I am your father.” — Darth Vader",
+            "“When gone am I, the last of the Jedi will you be. The Force runs strong in your family. Pass on what you have learned.” — Yoda",
+            "“I’ll never turn to the dark side. You’ve failed, your highness. I am a Jedi, like my father before me.” — Luke Skywalker",
+            "“Now, young Skywalker, you will die.” — Emperor Palpatine",
+            "“Just for once, let me look on you with my own eyes.” — Anakin Skywalker",
+            "“There’s always a bigger fish.” — Qui-Gon Jinn",
+            "“In time, the suffering of your people will persuade you to see our point of view.” — Nute Gunray",
+            "“You can’t stop the change, any more than you can stop the suns from setting.” — Shmi Skywalker",
+            "“Fear is the path to the dark side. Fear leads to anger; anger leads to hate; hate leads to suffering. I sense much fear in you.” — Yoda",
+            "“Well, if droids could think, there’d be none of us here, would there?” — Obi-Wan Kenobi",
+            "“We must keep our faith in the Republic. The day we stop believing democracy can work is the day we lose it.” — Queen Jamillia",
+            "“I’m just a simple man trying to make my way in the universe.” — Jango Fett",
+            "“What if I told you that the Republic was now under the control of a Dark Lord of the Sith?” — Count Dooku",
+            "“The dark side of the Force is a pathway to many abilities some consider to be unnatural.” — Chancellor Palpatine",
+            "“Power! Unlimited power!” — Darth Sidious",
+            "“So this is how liberty dies. With thunderous applause.” — Padmé Amidala",
+            "“You were my brother, Anakin. I loved you.” — Obi-Wan Kenobi",
+            "“Oh, my dear friend. How I’ve missed you.” — C-3PO"
+        ];
+        return quotes[Math.floor(Math.random() * quotes.length)];
     };
     return DemoService;
 }());

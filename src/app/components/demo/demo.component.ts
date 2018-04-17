@@ -15,10 +15,13 @@ import { getDemoData } from './demo.selectors';
       'error':item.error
     }"
     >
-      <h3>ID: {{ item.id }}</h3>
-      <h2>Status:</h2>
-      <p>loading: {{ item.loading }}</p>
-      <p>loading: {{ item.loaded }}</p>
+      <h3>{{ item.id }}</h3>
+      <div class="status">
+        <h2>Status:</h2>
+        <p>loading: {{ item.loading }}</p>
+        <p>loading: {{ item.loaded }}</p>
+      </div>
+      <p *ngIf="item.loaded">{{ item.data?.text }}</p>
       
       <button *ngIf="item.error" (click)="reload(item)">reload</button>
     </div>
