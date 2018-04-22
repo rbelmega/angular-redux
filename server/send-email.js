@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
-var fs = require('fs')
-var jsonfile = require('jsonfile')
-var file = '/tmp/data.json';
+const fs = require('fs')
+const jsonfile = require('jsonfile');
+
+const path = '/tmp/store.json';
 
 module.exports = function sendEmail({ store, res }) {
   const transporter = nodemailer.createTransport({
@@ -19,7 +20,7 @@ module.exports = function sendEmail({ store, res }) {
     to: process.env.FROM_EMAIL,
     subject: "Hey, here is toy store",
     text:"Hey, here is toy store",
-    attachments: [{ path : file}]
+    attachments: [{ path }]
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
@@ -31,7 +32,8 @@ module.exports = function sendEmail({ store, res }) {
       console.log(info);
       const millis = Date.now() - startDate;
       console.log("Seconds on processing: ", (millis/1000));
-      res.send("OK")
+      res.send("OK");
     }
+    fs.unlinkSync(path)
   });
 };
