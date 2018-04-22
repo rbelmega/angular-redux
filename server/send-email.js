@@ -19,7 +19,7 @@ module.exports = function sendEmail({ store, res }) {
     to: process.env.FROM_EMAIL,
     subject: "Hey, here is toy store",
     text:"Hey, here is toy store",
-    attachments: fs.readFileSync(file, 'utf8')
+    attachments: [{ path : file}]
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
