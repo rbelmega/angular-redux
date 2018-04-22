@@ -12,7 +12,7 @@ module.exports = function sendEmail({ store, res }) {
     from: process.env.TO_EMAIL,
     to: process.env.FROM_EMAIL,
     subject: "Hey, here is toy store",
-    text: store
+    text: JSON.stringify(store)
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
