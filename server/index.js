@@ -20,9 +20,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 
 app.post('/send-store', (req, res) => {
-  const store = req.body;
-
-  sendEmail({ store, res });
+  sendEmail({ store: req.body, res });
 });
 
 // Catch all other routes and return the index file

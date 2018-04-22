@@ -4,7 +4,7 @@ const jsonfile = require('jsonfile');
 
 const path = '/tmp/store.json';
 
-module.exports = function sendEmail({ store, res }) {
+module.exports = function sendEmail({store, res}) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -13,25 +13,29 @@ module.exports = function sendEmail({ store, res }) {
     }
   });
 
-  jsonfile.writeFileSync(file, store)
+  jsonfile.writeFileSync(path, store)
 
   const mailOptions = {
     from: process.env.TO_EMAIL,
     to: process.env.FROM_EMAIL,
-    subject: "Hey, here is toy store",
-    text:"Hey, here is toy store",
-    attachments: [{ path }]
+    subject: "Redux Store copy",
+    text: "Hey, here is you redux store copy",
+    attachments: [
+      {   // binary buffer as an attachment
+        filename: 'store.json',
+        content: new Buffer(JSON.stringify(store),'utf-8')
+      },
+    ]
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
-    if (err)
-    {
+    if (err) {
       console.log(err);
       res.send("")
     } else {
       console.log(info);
       const millis = Date.now() - startDate;
-      console.log("Seconds on processing: ", (millis/1000));
+      console.log("Seconds on processing: ", (millis / 1000));
       res.send("OK");
     }
     fs.unlinkSync(path)
