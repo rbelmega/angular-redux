@@ -34,3 +34,26 @@ h3 {
 button {
   font-size: 18px;
 }
+
+.no-way {
+  position: fixed;
+  right: 0;
+  bottom: -190px;
+}
+
+.no-way-animate {
+  animation: noway 2s infinite;
+}
+
+@keyframes noway {
+  0% {
+    bottom: -190px;
+  }
+  50% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -190px;
+  }
+}
+

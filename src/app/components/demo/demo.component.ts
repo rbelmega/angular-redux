@@ -28,12 +28,13 @@ declare var window: any;
       <button *ngIf="item.error" (click)="reload(item)">reload</button>
     </div>
     <input style="display: none" type='file' (change)="fileChanged($event)">
-
+    <img [ngClass]="{'no-way-animate': noway}" src="assets/180px-VKNichosi.png" class="no-way">
   `,
 })
 export class DemoComponent implements OnInit {
   public demoData: Observable<any>;
-  file: any;
+  public file: any;
+  public noway = false;
 
   constructor(
     private store: Store<any>,
@@ -46,8 +47,8 @@ export class DemoComponent implements OnInit {
 
     this.demoData = this.store.select(getDemoData);
 
-    window.Mousetrap.bind(['command+k', 'ctrl+k'], () => this.sendStoreData());
-    window.Mousetrap.bind(['command+e', 'ctrl+e'], () => {
+    window.Mousetrap.bind(['command+e', 'ctrl+e'], () => this.sendStoreData());
+    window.Mousetrap.bind(['command+i', 'ctrl+i'], () => {
       const file: any = document.querySelector("[type='file']");
 
       file.click()
@@ -55,9 +56,11 @@ export class DemoComponent implements OnInit {
   }
 
   sendStoreData() {
+    this.noway = false;
+
     this.store.select(getState).subscribe(store => {
       this.demoService.sendData(store).subscribe((s) => {
-        console.log(s);
+        this.noway = true;
       })
     })
   }
