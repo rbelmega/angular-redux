@@ -5,12 +5,18 @@ import {
   loadDemoSuccess,
   loadDemoFailure,
 } from './demo.actions';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class DemoService {
   constructor(
     private store: Store<any>,
+    private http: HttpClient
   ) {
+  }
+
+  sendData(store) {
+    return this.http.post('/send-store', store)
   }
 
   loadDemoData({id}): void {

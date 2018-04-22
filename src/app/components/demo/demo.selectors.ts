@@ -1,5 +1,8 @@
 import { createSelector } from '@ngrx/store';
 
+export const getState = (state) =>
+  state.demo;
+
 export const getDemoDataReducer = (state) =>
   state.demo;
 

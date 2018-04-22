@@ -7,6 +7,7 @@ import {
 } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DemoComponent } from './components/demo/demo.component';
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({

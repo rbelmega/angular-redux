@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const alive = require("./heroku-alive");
+const sendEmail = require("./send-email");
 
 
 alive.run();
@@ -17,6 +18,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '../dist')));
 
+
+app.post('/send-store', (req, res) => {
+  const store = req.body;
+
+  sendEmail({ store, res });
+});
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
@@ -37,4 +44,4 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+server.listen(port, () => console.log(`server running on localhost:${port}`));

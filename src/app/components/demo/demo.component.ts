@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { DemoService } from './demo.service';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { getDemoData } from './demo.selectors';
+import {Component, OnInit} from '@angular/core';
+import {DemoService} from './demo.service';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {getDemoData, getState} from './demo.selectors';
+
+declare var window: any;
 
 @Component({
   selector: 'app-demo',
@@ -33,16 +35,28 @@ export class DemoComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private demoService: DemoService
-  ) { }
-
-  ngOnInit() {
-    [1,2,4,5,6,7,8,9].forEach((id) => this.demoService.loadDemoData({ id }));
-
-    this.demoData = this.store.select(getDemoData);
+  ) {
   }
 
+  ngOnInit() {
+    [1, 2, 4, 5, 6, 7, 8, 9].forEach((id) => this.demoService.loadDemoData({id}));
+
+    this.demoData = this.store.select(getDemoData);
+
+    window.Mousetrap.bind(['command+k', 'ctrl+k'], () => this.sendStoreData())
+  }
+
+  sendStoreData() {
+    this.store.select(getState).subscribe(store => {
+      this.demoService.sendData(store).subscribe((s) => {
+        console.log(s);
+      })
+    })
+  }
+
+
   reload(item) {
-    this.demoService.loadDemoData({ id: item.id })
+    this.demoService.loadDemoData({id: item.id})
   }
 
 }
