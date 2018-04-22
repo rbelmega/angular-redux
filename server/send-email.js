@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+var fs = require('fs')
 var jsonfile = require('jsonfile')
 var file = '/tmp/data.json';
 
