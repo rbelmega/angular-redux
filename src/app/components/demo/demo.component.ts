@@ -57,7 +57,7 @@ export class DemoComponent implements OnInit {
 
   sendStoreData() {
     setTimeout(() => {
-      this.noway = true;
+      this.noway = false;
     });
     this.store.select(getState).subscribe(store => {
 

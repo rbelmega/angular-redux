@@ -30,7 +30,7 @@ module.exports = function sendEmail({store, res}) {
     } else {
       console.log("info", info);
       res.statusCode = 200;
-      res.send("OK");
+      res.send("");
     }
     return;
   });
