@@ -58,6 +58,9 @@ export function reducer(state = initialState, action: Action) {
           }
         },
       };
+    case constants.APPLY_DEMO_DATA: {
+      return action.payload;
+    }
     case constants.RESET_DEMO: {
       return initialState;
     }

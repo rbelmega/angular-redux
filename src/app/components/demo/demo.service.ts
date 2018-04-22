@@ -4,6 +4,7 @@ import {
   loadDemoPending,
   loadDemoSuccess,
   loadDemoFailure,
+  applyDemoData,
 } from './demo.actions';
 import {HttpClient} from '@angular/common/http';
 
@@ -13,6 +14,10 @@ export class DemoService {
     private store: Store<any>,
     private http: HttpClient
   ) {
+  }
+
+  applyDemoData({data}) {
+    this.store.dispatch(applyDemoData({data}));
   }
 
   sendData(store) {

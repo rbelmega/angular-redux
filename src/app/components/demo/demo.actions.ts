@@ -19,3 +19,8 @@ export const loadDemoPending = ({id}) => ({
 export const resetDemo = () => ({
   type: constants.RESET_DEMO,
 });
+
+export const applyDemoData = ({data}) => ({
+  type: constants.APPLY_DEMO_DATA,
+  payload: data,
+});

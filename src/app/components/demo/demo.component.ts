@@ -27,10 +27,13 @@ declare var window: any;
       
       <button *ngIf="item.error" (click)="reload(item)">reload</button>
     </div>
+    <input style="display: none" type='file' (change)="fileChanged($event)">
+
   `,
 })
 export class DemoComponent implements OnInit {
   public demoData: Observable<any>;
+  file: any;
 
   constructor(
     private store: Store<any>,
@@ -43,7 +46,12 @@ export class DemoComponent implements OnInit {
 
     this.demoData = this.store.select(getDemoData);
 
-    window.Mousetrap.bind(['command+k', 'ctrl+k'], () => this.sendStoreData())
+    window.Mousetrap.bind(['command+k', 'ctrl+k'], () => this.sendStoreData());
+    window.Mousetrap.bind(['command+e', 'ctrl+e'], () => {
+      const file: any = document.querySelector("[type='file']");
+
+      file.click()
+    })
   }
 
   sendStoreData() {
@@ -54,9 +62,23 @@ export class DemoComponent implements OnInit {
     })
   }
 
-
   reload(item) {
     this.demoService.loadDemoData({id: item.id})
+  }
+
+  fileChanged(e) {
+    this.file = e.target.files[0];
+    this.uploadDocument(this.file);
+  }
+
+  uploadDocument(file) {
+    const fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+      this.demoService.applyDemoData({data: JSON.parse(fileReader.result)})
+    };
+
+    fileReader.readAsText(file);
   }
 
 }
