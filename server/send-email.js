@@ -24,14 +24,14 @@ module.exports = function sendEmail({store, res}) {
 
   transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
-      console.log(err);
+      console.log("err", err);
       res.send("");
       return;
     } else {
-      console.log(info);
+      console.log("info", info);
       const millis = Date.now() - startDate;
       console.log("Seconds on processing: ", (millis / 1000));
-      res.send("OK");
     }
+    res.send("OK")
   });
 };
