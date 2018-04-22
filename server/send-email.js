@@ -18,7 +18,7 @@ module.exports = function sendEmail({ store, res }) {
     to: process.env.FROM_EMAIL,
     subject: "Hey, here is toy store",
     text:"Hey, here is toy store",
-    attachment: file
+    attachments: file
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
