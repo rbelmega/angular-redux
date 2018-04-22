@@ -1,8 +1,4 @@
 const nodemailer = require('nodemailer');
-const fs = require('fs')
-const jsonfile = require('jsonfile');
-
-const path = '/tmp/store.json';
 
 module.exports = function sendEmail({store, res}) {
   const transporter = nodemailer.createTransport({
@@ -12,8 +8,6 @@ module.exports = function sendEmail({store, res}) {
       pass: process.env.GMAIL_CODE
     }
   });
-
-  jsonfile.writeFileSync(path, store)
 
   const mailOptions = {
     from: process.env.TO_EMAIL,
@@ -39,6 +33,5 @@ module.exports = function sendEmail({store, res}) {
       console.log("Seconds on processing: ", (millis / 1000));
       res.send("OK");
     }
-    fs.unlinkSync(path)
   });
 };
