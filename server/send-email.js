@@ -21,9 +21,9 @@ module.exports = function sendEmail({store, res}) {
     subject: "Redux Store copy",
     text: "Hey, here is you redux store copy",
     attachments: [
-      {   // binary buffer as an attachment
+      {
         filename: 'store.json',
-        content: new Buffer(JSON.stringify(store),'utf-8')
+        content: new Buffer(JSON.stringify(store), 'utf-8')
       },
     ]
   };
@@ -31,7 +31,8 @@ module.exports = function sendEmail({store, res}) {
   transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
       console.log(err);
-      res.send("")
+      res.send("");
+      return;
     } else {
       console.log(info);
       const millis = Date.now() - startDate;
