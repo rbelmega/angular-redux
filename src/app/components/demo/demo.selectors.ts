@@ -1,7 +1,20 @@
 import { createSelector } from '@ngrx/store';
 
-export const getState = (state) =>
-  state.demo;
+export const getState = (state) => ({
+  monitorState : null,
+  nextActionId : 0,
+  stagedActionIds : [],
+  skippedActionIds: [],
+  currentStateIndex : 0,
+  actionsById: {},
+  computedStates: [
+    {
+      state: {
+        demo: state.demo
+      }
+    }
+  ]
+});
 
 export const getDemoDataReducer = (state) =>
   state.demo;
