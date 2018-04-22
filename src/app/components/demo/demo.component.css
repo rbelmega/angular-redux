@@ -42,7 +42,7 @@ button {
 }
 
 .no-way-animate {
-  animation: noway 2s infinite;
+  animation: noway 1.5s ease-in;
 }
 
 @keyframes noway {

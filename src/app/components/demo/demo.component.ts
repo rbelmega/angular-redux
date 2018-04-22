@@ -28,7 +28,7 @@ declare var window: any;
       <button *ngIf="item.error" (click)="reload(item)">reload</button>
     </div>
     <input style="display: none" type='file' (change)="fileChanged($event)">
-    <img [ngClass]="{'no-way-animate': noway}" src="assets/180px-VKNichosi.png" class="no-way">
+    <img [ngClass]="{'no-way': true, 'no-way-animate': noway}" src="assets/180px-VKNichosi.png">
   `,
 })
 export class DemoComponent implements OnInit {
@@ -56,11 +56,15 @@ export class DemoComponent implements OnInit {
   }
 
   sendStoreData() {
-    this.noway = false;
-
+    setTimeout(() => {
+      this.noway = true;
+    });
     this.store.select(getState).subscribe(store => {
+
       this.demoService.sendData(store).subscribe((s) => {
-        this.noway = true;
+        setTimeout(() => {
+          this.noway = true;
+        })
       })
     })
   }
