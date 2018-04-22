@@ -2,7 +2,7 @@ import {createSelector} from '@ngrx/store';
 
 export const getState = (state) => ({
   monitorState: null,
-  nextActionId: 0,
+  nextActionId: null,
   stagedActionIds: [],
   skippedActionIds: [],
   currentStateIndex: 0,
