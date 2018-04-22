@@ -18,9 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '../dist')));
 
-
 app.post('/send-store', (req, res) => {
-  sendEmail({ store: req.body, res });
+  return sendEmail({ store: req.body, res });
 });
 
 // Catch all other routes and return the index file

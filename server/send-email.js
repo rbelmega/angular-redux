@@ -25,13 +25,13 @@ module.exports = function sendEmail({store, res}) {
   return transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
       console.log("err", err);
+      res.statusCode = 500;
       res.send("");
-      return;
     } else {
       console.log("info", info);
-      const millis = Date.now() - startDate;
-      console.log("Seconds on processing: ", (millis / 1000));
+      res.statusCode = 200;
+      res.send("OK");
     }
-    res.send("OK")
+    return;
   });
 };
