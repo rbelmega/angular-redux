@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {DemoService} from './demo.service';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
@@ -28,19 +28,18 @@ declare var window: any;
       <button *ngIf="item.error" (click)="reload(item)">reload</button>
     </div>
     <input style="display: none" type='file' (change)="fileChanged($event)">
-    <img class="no-way" src="assets/180px-VKNichosi.png">
+    <img [ngClass]="{'no-way': true, 'no-way-animate': noway}" src="assets/180px-VKNichosi.png">
   `,
 })
 export class DemoComponent implements OnInit {
   public demoData: Observable<any>;
   public file: any;
-  public noway = {
-    show: false
-  };
+  public noway = false;
 
   constructor(
     private store: Store<any>,
-    private demoService: DemoService
+    private demoService: DemoService,
+    private _zone: NgZone
   ) {
   }
 
@@ -49,7 +48,9 @@ export class DemoComponent implements OnInit {
 
     this.demoData = this.store.select(getDemoData);
 
-    window.Mousetrap.bind(['command+e', 'ctrl+e'], () => this.sendStoreData());
+    window.Mousetrap.bind(['command+e', 'ctrl+e'], () => {
+      this._zone.run(() => this.sendStoreData())
+    });
     window.Mousetrap.bind(['command+i', 'ctrl+i'], () => {
       const file: any = document.querySelector("[type='file']");
 
@@ -58,11 +59,11 @@ export class DemoComponent implements OnInit {
   }
 
   sendStoreData() {
-    document.querySelector(".no-way").classList.remove('no-way-animate');
+    this.noway = false;
 
     this.store.select(getState).subscribe(store => {
       this.demoService.sendData(store).subscribe((s) => {
-        document.querySelector(".no-way").classList.add('no-way-animate');
+        this.noway = true;
       })
     })
   }
