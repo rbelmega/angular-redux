@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {StoreModule} from '@ngrx/store';
 import {
   StoreRouterConnectingModule,
   RouterStateSerializer,
 } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers, metaReducers } from './reducers';
-import { HttpClientModule } from '@angular/common/http';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {reducers, metaReducers} from './reducers';
+import {HttpClientModule} from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { DemoComponent } from './components/demo/demo.component';
-import { DemoService } from './components/demo/demo.service';
+import {AppComponent} from './app.component';
+import {DemoComponent} from './components/demo/demo.component';
+import {DemoService} from './components/demo/demo.service';
 
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -36,4 +36,5 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

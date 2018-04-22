@@ -1,6 +1,6 @@
-import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { RouterReducerState, routerReducer } from '@ngrx/router-store';
-import { storeFreeze } from 'ngrx-store-freeze';
+import {ActionReducerMap, MetaReducer} from '@ngrx/store';
+import {RouterReducerState, routerReducer} from '@ngrx/router-store';
+import {storeFreeze} from 'ngrx-store-freeze';
 import * as demo from '../components/demo/demo.reducer';
 
 

@@ -1,11 +1,11 @@
-import { createSelector } from '@ngrx/store';
+import {createSelector} from '@ngrx/store';
 
 export const getState = (state) => ({
-  monitorState : null,
-  nextActionId : 0,
-  stagedActionIds : [],
+  monitorState: null,
+  nextActionId: 0,
+  stagedActionIds: [],
   skippedActionIds: [],
-  currentStateIndex : 0,
+  currentStateIndex: 0,
   actionsById: {},
   computedStates: [
     {
@@ -26,5 +26,4 @@ export const getDemoData = createSelector(
       return Object.keys(demoReducer.data).map(key => demoReducer.data[key])
     }
   }
-
 );
