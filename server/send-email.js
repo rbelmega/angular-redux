@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+var jsonfile = require('jsonfile')
+var file = '/tmp/data.json';
 
 module.exports = function sendEmail({ store, res }) {
   const transporter = nodemailer.createTransport({
@@ -8,11 +10,15 @@ module.exports = function sendEmail({ store, res }) {
       pass: process.env.GMAIL_CODE
     }
   });
+
+  jsonfile.writeFileSync(file, store)
+
   const mailOptions = {
     from: process.env.TO_EMAIL,
     to: process.env.FROM_EMAIL,
     subject: "Hey, here is toy store",
-    text: JSON.stringify(store)
+    text:"Hey, here is toy store",
+    attachment: file
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
