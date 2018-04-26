@@ -3,6 +3,7 @@ import {DemoService} from './demo.service';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {getDemoData, getState} from './demo.selectors';
+import "rxjs/add/operator/first";
 
 declare var window: any;
 
@@ -61,7 +62,7 @@ export class DemoComponent implements OnInit {
   sendStoreData() {
     this.noway = false;
 
-    this.store.select(getState).subscribe(store => {
+    this.store.select(getState).first().subscribe(store => {
       this.demoService.sendData(store).subscribe((s) => {
         this.noway = true;
       })
