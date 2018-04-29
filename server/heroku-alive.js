@@ -3,7 +3,7 @@ const http = require('http'); //importing http
 function run() {
     setInterval(() => {
       var options = {
-        host: 'rbelmeha.herokuapp.com',
+        host: 'angular-redux-demo.herokuapp.com',
         port: 80,
         path: '/'
       };

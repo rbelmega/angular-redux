@@ -5,11 +5,11 @@ const http = require('http');
 const bodyParser = require('body-parser');
 
 const app = express();
-const alive = require("./heroku-alive");
+//const alive = require("./heroku-alive");
 const sendEmail = require("./send-email");
 
 
-alive.run();
+//alive.run();
 
 // Parsers for POST data
 app.use(bodyParser.json());
