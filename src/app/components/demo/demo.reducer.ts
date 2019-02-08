@@ -58,6 +58,33 @@ export function reducer(state = initialState, action: Action) {
           }
         },
       };
+    case constants.LOAD_DOUBLE_PENDING:
+      return {
+        ...state,
+        loadingDouble: true,
+        loadedDouble: false,
+      };
+    case constants.LOAD_DOUBLE_SUCCESS:
+      return {
+        ...state,
+        double: action.payload,
+        loadingDouble: false,
+        loadedDouble: true,
+      };
+    case constants.LOAD_DOUBLE_FAILURE:
+      return {
+        ...state,
+        errorDouble: action.error,
+        loadingDouble: false,
+        loadedDouble: false,
+      };
+      case constants.RESET_DOUBLE:
+      return {
+        ...state,
+        double: null,
+        loadingDouble: false,
+        loadedDouble: false,
+      };
     case constants.APPLY_DEMO_DATA: {
       return action.payload;
     }

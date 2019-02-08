@@ -4,9 +4,15 @@ import {
   loadDemoPending,
   loadDemoSuccess,
   loadDemoFailure,
-  applyDemoData,
+  applyDemoData, loadDoubleSuccess,
 } from './demo.actions';
 import {HttpClient} from '@angular/common/http';
+import {getDoubleData} from "./demo.selectors";
+import {switchMap} from "rxjs/operators/switchMap";
+import {first} from "rxjs/operators/first";
+import {tap} from "rxjs/operators/tap";
+import {of} from "rxjs/observable/of";
+import {filter} from "rxjs/operators/filter";
 
 @Injectable()
 export class DemoService {
@@ -82,4 +88,35 @@ export class DemoService {
 
     return quotes[Math.floor(Math.random() * quotes.length)];
   }
+
+  getData() {
+    const selector = () => this.store.select(getDoubleData);
+    const loader = () => this.loadDouble();
+    return this.getAbsData(selector, loader)
+  }
+
+  getAbsData(select, loader) {
+    return select()
+      .pipe(
+        first(),
+        switchMap(data => {
+            if (data) {
+              return of(data)
+            }
+            loader();
+            return select()
+              .pipe(
+                filter((data: any) => data),
+                first())
+          }
+        )
+      )
+  }
+
+  loadDouble(): void {
+    this.http.get('https://raw.githubusercontent.com/rbelmega/angular-pdr/master/data/fines/fines.json').subscribe(data => {
+      this.store.dispatch(loadDoubleSuccess(data))
+    })
+  }
 }
+

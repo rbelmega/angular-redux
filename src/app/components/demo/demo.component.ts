@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {getDemoData, getState} from './demo.selectors';
 import "rxjs/add/operator/first";
+import {resetDouble} from "./demo.actions";
 
 declare var window: any;
 
@@ -11,6 +12,9 @@ declare var window: any;
   selector: 'app-demo',
   styleUrls: ['./demo.component.css'],
   template: `
+<button (click)="getData()">get data</button>
+<button (click)="resetData()">reset data</button>
+    <div>{{ double$ | async | json }}</div>
     <div *ngFor='let item of (demoData | async)' class="example-component" 
     [ngClass]="{
       'loading':item.loading,
@@ -36,6 +40,7 @@ export class DemoComponent implements OnInit {
   public demoData: Observable<any>;
   public file: any;
   public noway = false;
+  public double$: any;
 
   constructor(
     private store: Store<any>,
@@ -57,6 +62,18 @@ export class DemoComponent implements OnInit {
 
       file.click()
     })
+
+    this.double$ = this.demoService.getData();
+  }
+
+  resetData() {
+    this.store.dispatch(resetDouble())
+  }
+
+  getData() {
+    this.demoService.getData().subscribe(data => {
+      console.log(data);
+    });
   }
 
   sendStoreData() {

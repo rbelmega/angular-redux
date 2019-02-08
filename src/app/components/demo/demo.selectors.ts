@@ -13,3 +13,9 @@ export const getDemoData = createSelector(
     }
   }
 );
+
+
+export const getDoubleData = createSelector(
+  getDemoDataReducer,
+  (demoReducer) => demoReducer.double
+);

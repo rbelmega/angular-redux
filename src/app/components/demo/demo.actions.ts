@@ -24,3 +24,19 @@ export const applyDemoData = ({data}) => ({
   type: constants.APPLY_DEMO_DATA,
   payload: data,
 });
+
+export const loadDoublePending = ({data}) => ({
+  type: constants.LOAD_DOUBLE_PENDING,
+});
+
+export const loadDoubleSuccess = (payload) => ({
+  type: constants.LOAD_DOUBLE_SUCCESS,
+  payload
+});
+export const loadDoubleFailure = (error) => ({
+  type: constants.LOAD_DOUBLE_FAILURE,
+  error
+});
+export const resetDouble = () => ({
+  type: constants.RESET_DOUBLE,
+});
