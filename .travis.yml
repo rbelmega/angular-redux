@@ -27,6 +27,7 @@ script:
 - npm run lint
 - npm run build
 - docker build -t rbelmeha/angular-redux .
+ - docker tag rbelmeha/angular-redux registry.heroku.com/docker-angular-redux/web
 
 deploy:
   provider: script
