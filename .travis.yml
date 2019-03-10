@@ -13,4 +13,5 @@ before_script:
 
 script:
 - ng lint
+- ng build
 - docker build -t rbelmeha/angular-redux .
