@@ -12,9 +12,9 @@ declare var window: any;
   selector: 'app-demo',
   styleUrls: ['./demo.component.css'],
   template: `
-    <button (click)="getData()">get data</button>
-    <button (click)="resetData()">reset data</button>
-    <div>{{ double$ | async | json }}</div>
+    <!--<button (click)="getData()">get data</button>-->
+    <!--<button (click)="resetData()">reset data</button>-->
+    <!--<div>{{ double$ | async | json }}</div>-->
     <div
       *ngFor="let item of (demoData | async)"
       class="example-component"
