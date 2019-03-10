@@ -35,7 +35,7 @@ deploy:
     # push to dockerhub & heroku
     docker push rbelmeha/angular-redux;
     docker push registry.heroku.com/docker-angular-redux/web;
-    heroku container:release web --app docker-angular-redux
+    heroku container: web release --app docker-angular-redux
   on:
     branch: master
 
