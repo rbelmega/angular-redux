@@ -15,3 +15,11 @@ script:
 - ng lint
 - ng build
 - docker build -t rbelmeha/angular-redux .
+
+deploy:
+  provider: Heroku
+  api_key:
+    secure: HEROKU_API
+  app: docker-angular-redux
+ ###  on:
+  ###   repo: blarvin/TEAM-MALN-ACEBOOK ### YOUR REPO IS HERE
