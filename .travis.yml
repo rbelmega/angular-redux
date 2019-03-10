@@ -37,3 +37,5 @@ deploy:
     heroku container:release web --app docker-angular-redux
   on:
     branch: master
+
+
