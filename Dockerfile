@@ -14,4 +14,4 @@ COPY dist $HOME/dist
 COPY server $HOME/dist/server
 
 EXPOSE 3000
-ENTRYPOINT ["node", "./dist/server"]
+CMD ["node", "./dist/server"]
