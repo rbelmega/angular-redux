@@ -11,7 +11,7 @@ export interface Action {
 }
 
 const initialState = {
-  data: {}
+  data: {},
 };
 
 export function reducer(state = initialState, action: Action) {
@@ -25,10 +25,9 @@ export function reducer(state = initialState, action: Action) {
             id: action.payload,
             loading: true,
             loaded: false,
-          }
-        }
-
-      }
+          },
+        },
+      };
     }
 
     case constants.LOAD_DEMO_SUCCESS: {
@@ -41,8 +40,8 @@ export function reducer(state = initialState, action: Action) {
             data: action.payload,
             loading: false,
             loaded: true,
-          }
-        }
+          },
+        },
       };
     }
     case constants.LOAD_DEMO_FAILURE:
@@ -55,8 +54,35 @@ export function reducer(state = initialState, action: Action) {
             loaded: false,
             id: action.payload,
             error: action.error,
-          }
+          },
         },
+      };
+    case constants.LOAD_DOUBLE_PENDING:
+      return {
+        ...state,
+        loadingDouble: true,
+        loadedDouble: false,
+      };
+    case constants.LOAD_DOUBLE_SUCCESS:
+      return {
+        ...state,
+        double: action.payload,
+        loadingDouble: false,
+        loadedDouble: true,
+      };
+    case constants.LOAD_DOUBLE_FAILURE:
+      return {
+        ...state,
+        errorDouble: action.error,
+        loadingDouble: false,
+        loadedDouble: false,
+      };
+    case constants.RESET_DOUBLE:
+      return {
+        ...state,
+        double: null,
+        loadingDouble: false,
+        loadedDouble: false,
       };
     case constants.APPLY_DEMO_DATA: {
       return action.payload;
