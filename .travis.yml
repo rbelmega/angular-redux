@@ -1,11 +1,10 @@
+sudo: required
 language: node_js
 node_js:
   - "10.15.1"
 services:
   - docker
-
 dist: trusty
-sudo: required
 branches:
   only:
   - master
@@ -14,4 +13,4 @@ before_script:
 
 script:
 - ng lint
-docker build -t rbelmeha/angular-redux .
+- docker build -t rbelmeha/angular-redux .
