@@ -7,7 +7,7 @@ WORKDIR $HOME
 
 COPY \
   package.json \
-  angular.json \
+  .angular-cli.json \
   tsconfig.json \
   $HOME
 COPY dist $HOME/dist
