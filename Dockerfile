@@ -11,9 +11,9 @@ COPY \
   tsconfig.json \
   $HOME
 COPY dist $HOME/dist
-CMD npm i express
-CMD npm i body-parser
-CMD npm i nodemailer
+RUN npm i express
+RUN npm i body-parser
+RUN npm i nodemailer
 
 COPY server $HOME/dist/server
 
