@@ -11,12 +11,13 @@ services:
 branches:
   only:
   - master
+
 before_script:
   - npm install -g @angular/cli
 
 script:
-- ng lint
-- ng build
+- npm run lint
+- npm run build
 - docker build -t rbelmeha/angular-redux .
 
 deploy:
@@ -24,5 +25,3 @@ deploy:
   api_key:
     secure: $HEROKU_API
   app: docker-angular-redux
- ###  on:
-  ###   repo: blarvin/TEAM-MALN-ACEBOOK ### YOUR REPO IS HERE
