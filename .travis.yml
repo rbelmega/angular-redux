@@ -12,6 +12,14 @@ branches:
   only:
   - master
 
+before_install:
+  # install heroku CLI
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  # login to docker registries (dockerhub + heroku)
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+
+
 before_script:
   - npm install -g @angular/cli
 
@@ -21,7 +29,13 @@ script:
 - docker build -t rbelmeha/angular-redux .
 
 deploy:
-  provider: Heroku
-  api_key:
-    secure: $HEROKU_API
-  app: docker-angular-redux
+  provider: script
+  script:
+    # push to dockerhub & heroku
+    docker push rbelmeha/angular-redux;
+    docker push registry.heroku.com/docker-angular-redux/web;
+    heroku container:release web --app docker-angular-redux
+  on:
+    branch: master
+
+
