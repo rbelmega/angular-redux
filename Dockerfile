@@ -15,7 +15,7 @@ RUN npm i express
 RUN npm i body-parser
 RUN npm i nodemailer
 
-COPY server $HOME/dist/server
+COPY server $HOME/server
 
 EXPOSE 3000
-CMD ["node", "./dist/server"]
+CMD ["node", "./server"]
