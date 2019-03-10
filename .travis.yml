@@ -22,5 +22,6 @@ script:
 
 deploy:
   provider: Heroku
-  api_key: secure: $HEROKU_API
+  api_key:
+    secure: $HEROKU_API
   app: docker-angular-redux
