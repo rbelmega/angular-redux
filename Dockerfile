@@ -11,6 +11,10 @@ COPY \
   tsconfig.json \
   $HOME
 COPY dist $HOME/dist
+CMD npm i express
+CMD npm i body-parser
+CMD npm i nodemailer
+
 COPY server $HOME/dist/server
 
 EXPOSE 3000
