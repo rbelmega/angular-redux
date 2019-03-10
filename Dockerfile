@@ -11,7 +11,7 @@ COPY \
   tsconfig.json \
   $HOME
 COPY dist $HOME/dist
-COPY src/server/newrelic.js $HOME/dist/server
+COPY server $HOME/dist/server
 
 EXPOSE 3000
 ENTRYPOINT ["node", "./dist/server"]
