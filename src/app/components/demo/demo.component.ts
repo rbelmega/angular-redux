@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { getDemoData, getState } from './demo.selectors';
 import 'rxjs/add/operator/first';
 import { resetDouble } from './demo.actions';
+import { HotjarService } from '../../hotjar.service';
 
 declare var window: any;
 
@@ -50,10 +51,12 @@ export class DemoComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private demoService: DemoService,
-    private _zone: NgZone
+    private _zone: NgZone,
+    private hotjarService: HotjarService
   ) {}
 
   ngOnInit() {
+    this.hotjarService.init();
     [1, 2, 4, 5, 6, 7, 8, 9].forEach(id =>
       this.demoService.loadDemoData({ id })
     );
